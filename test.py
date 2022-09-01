@@ -1,9 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 
+# REQUIREMENTS: https://pixeltree.notion.site/City-Council-Scraping-34a2f5a24d59400faf9a128f2653ebf2
+# Meeting Minutes Directory: https://pub-calgary.escribemeetings.com
+
 # TODO
 # 1. JSON Structure, serialize
-# 2. DRIs
+# 2. Complete the rest of the fields
+# 3. Classify using spaCy
 
 URL = "https://pub-calgary.escribemeetings.com/Meeting.aspx?Id=9a27aea6-df27-4322-907f-164396fcf3b0&Agenda=PostMinutes&lang=English"
 page = requests.get(URL)
@@ -38,3 +42,6 @@ attendance_table = agenda_header.find("div", class_="AgendaHeaderAttendanceTable
 # Get the attendence (seperated by who can and can't vote)
 present = [x.text for x in attendance_table[2].find_all("li")]
 also_present = [x.text for x in attendance_table[5].find_all("li")]
+
+## Body information
+
