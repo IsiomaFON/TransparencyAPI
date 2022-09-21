@@ -1,0 +1,15 @@
+# Code to test bart summarizer (Huggingface.co) on meeting details
+
+# Create list of details for the motions carried
+detail_list=[]
+for key in meeting_dict.keys():
+    if "details" in meeting_dict.get(key, {}):
+        detail_list.append(meeting_dict[key]['details'])
+
+# Flatten nested list (detail_list)
+detail_text=[item for sublist in detail_list for item in sublist]
+
+
+# trying summarizer on meeting details
+summarizer = pipeline("summarization", model="knkarthick/MEETING-SUMMARY-BART-LARGE-XSUM-SAMSUM-DIALOGSUM")
+summarizer(*detail_text)
